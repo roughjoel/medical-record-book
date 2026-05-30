@@ -1,0 +1,71 @@
+# Gradle
+.gradle/
+build/
+**/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Android Studio / IntelliJ
+*.iml
+.idea/
+.idea/caches/
+.idea/libraries/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/usage.statistics.xml
+.idea/dictionaries/
+.idea/shelf/
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+
+# Android generated files
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.ap_
+*.aab
+*.aar
+*.dex
+*.class
+generated/
+
+# Local machine configuration
+local.properties
+*.local
+
+# Signing / secrets
+*.jks
+*.keystore
+*.p12
+*.pem
+keystore.properties
+signing.properties
+secrets.properties
+
+# Logs and reports
+*.log
+hs_err_pid*
+replay_pid*
+lint-results*.html
+lint-results*.xml
+
+# Test / coverage output
+coverage/
+*.ec
+*.exec
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Kotlin / Java tooling caches
+.kotlin/
+.kotlin_module
+
+# Node tooling, if used for auxiliary scripts
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
