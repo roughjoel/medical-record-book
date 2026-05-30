@@ -147,12 +147,10 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if (node.isKeyNode()) {
             holder.viewNodeDot.setBackground(createCircleDrawable(COLOR_KEY_DOT, Color.WHITE, dp(context, 3)));
             holder.cardTimeline.setCardBackgroundColor(COLOR_KEY_CARD);
-            holder.tvKeyNodeTag.setVisibility(View.VISIBLE);
             holder.tvDate.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
         } else {
             holder.viewNodeDot.setBackground(createCircleDrawable(COLOR_NORMAL_DOT, Color.WHITE, dp(context, 3)));
             holder.cardTimeline.setCardBackgroundColor(COLOR_NORMAL_CARD);
-            holder.tvKeyNodeTag.setVisibility(View.GONE);
             holder.tvDate.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
         }
 
@@ -325,7 +323,6 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         CardView cardTimeline;
         TextView tvDate;
         TextView tvDayCount;
-        TextView tvKeyNodeTag;
         TextView tvSymptoms;
         HorizontalScrollView hsvImages;
         LinearLayout layoutImages;
@@ -343,7 +340,6 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             cardTimeline = itemView.findViewById(R.id.cardTimeline);
             tvDate = itemView.findViewById(R.id.tvDate);
             tvDayCount = itemView.findViewById(R.id.tvDayCount);
-            tvKeyNodeTag = itemView.findViewById(R.id.tvKeyNodeTag);
             tvSymptoms = itemView.findViewById(R.id.tvSymptoms);
             hsvImages = itemView.findViewById(R.id.hsvImages);
             layoutImages = itemView.findViewById(R.id.layoutImages);

@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingStart="14dp"
+    android:paddingStart="16dp"
     android:paddingEnd="16dp">
 
     <FrameLayout
-        android:layout_width="34dp"
+        android:layout_width="32dp"
         android:layout_height="match_parent">
 
         <View
@@ -31,24 +31,27 @@
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_gravity="top|center_horizontal"
-            android:layout_marginTop="14dp" />
+            android:layout_marginTop="16dp" />
     </FrameLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardTimeline"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="14dp"
+        android:layout_marginBottom="12dp"
         android:layout_weight="1"
         app:cardCornerRadius="8dp"
-        app:cardElevation="2dp"
+        app:cardElevation="1dp"
         app:cardUseCompatPadding="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingStart="16dp"
+            android:paddingTop="15dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -67,7 +70,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="#1F2A44"
-                        android:textSize="16sp"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -78,30 +81,16 @@
                         android:textColor="#7A869A"
                         android:textSize="12sp" />
                 </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tvKeyNodeTag"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_key_tag"
-                    android:paddingStart="10dp"
-                    android:paddingTop="4dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="4dp"
-                    android:text="关键节点"
-                    android:textColor="#FFFFFF"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/tvSymptoms"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:lineSpacingExtra="3dp"
+                android:layout_marginTop="10dp"
+                android:lineSpacingExtra="4dp"
                 android:textColor="#172B4D"
-                android:textSize="17sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <HorizontalScrollView
@@ -126,7 +115,7 @@
                 android:layout_marginTop="12dp"
                 android:background="@drawable/bg_medical_box"
                 android:orientation="horizontal"
-                android:padding="12dp">
+                android:padding="13dp">
 
                 <TextView
                     android:layout_width="28dp"
@@ -168,7 +157,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/bg_medicine_box"
                 android:orientation="horizontal"
-                android:padding="12dp">
+                android:padding="13dp">
 
                 <TextView
                     android:layout_width="28dp"

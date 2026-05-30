@@ -34,6 +34,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -47,6 +48,7 @@ public class MainActivity extends ComponentActivity {
     private static final String DEFAULT_DISEASE_NAME = "默认病程";
     private static final int RANGE_WEEK = 7;
     private static final int RANGE_MONTH = 30;
+    private static final String DATE_PATTERN = "yyyy-MM-dd";
 
     private RecyclerView rvTimeline;
     private TextView tvPageSubtitle;
@@ -199,6 +201,19 @@ public class MainActivity extends ComponentActivity {
             startCalendar.add(Calendar.DAY_OF_YEAR, -(RANGE_MONTH - 1));
         }
 
+        Calendar today = startOfDay(Calendar.getInstance());
+        startCalendar = startOfDay(startCalendar);
+        endCalendar = startOfDay(endCalendar);
+        if (startCalendar.after(today)) {
+            Toast.makeText(this, "不能查看未来日期的病历记录", Toast.LENGTH_SHORT).show();
+            windowAnchor = today;
+            refreshCurrentWindow();
+            return;
+        }
+        if (endCalendar.after(today)) {
+            endCalendar = today;
+        }
+
         String startDate = formatDate(startCalendar);
         String endDate = formatDate(endCalendar);
 
@@ -216,6 +231,15 @@ public class MainActivity extends ComponentActivity {
     private void shiftWindow(int direction) {
         windowAnchor.add(Calendar.DAY_OF_YEAR, direction * rangeDays);
         refreshCurrentWindow();
+    }
+
+    private Calendar startOfDay(Calendar source) {
+        Calendar calendar = (Calendar) source.clone();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return calendar;
     }
 
     private Calendar startOfWeek(Calendar source) {
@@ -289,6 +313,10 @@ public class MainActivity extends ComponentActivity {
 
                     if (date.isEmpty()) {
                         etDate.setError("请填写记录日期");
+                        return;
+                    }
+                    if (!isValidRecordDate(date)) {
+                        etDate.setError("记录日期不能晚于今天");
                         return;
                     }
 
@@ -454,7 +482,18 @@ public class MainActivity extends ComponentActivity {
     }
 
     private String formatDate(Calendar calendar) {
-        return new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.getTime());
+        return new SimpleDateFormat(DATE_PATTERN, Locale.getDefault()).format(calendar.getTime());
+    }
+
+    private boolean isValidRecordDate(String dateText) {
+        SimpleDateFormat formatter = new SimpleDateFormat(DATE_PATTERN, Locale.getDefault());
+        formatter.setLenient(false);
+        try {
+            Date parsedDate = formatter.parse(dateText);
+            return parsedDate != null && !parsedDate.after(startOfDay(Calendar.getInstance()).getTime());
+        } catch (ParseException e) {
+            return false;
+        }
     }
 
     private static class DialogState {
