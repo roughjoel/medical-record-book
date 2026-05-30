@@ -22,14 +22,30 @@
             android:paddingEnd="20dp"
             android:paddingBottom="16dp">
 
-            <TextView
-                android:id="@+id/tvPageTitle"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="病历本"
-                android:textColor="#162033"
-                android:textSize="26sp"
-                android:textStyle="bold" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/medical_record_book_logo" />
+
+                <TextView
+                    android:id="@+id/tvPageTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:text="病历本"
+                    android:textColor="#162033"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvPageSubtitle"

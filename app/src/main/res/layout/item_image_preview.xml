@@ -3,7 +3,8 @@
     android:layout_width="72dp"
     android:layout_height="72dp"
     android:layout_marginEnd="8dp"
-    android:background="#E6EAF0">
+    android:background="@drawable/bg_image_preview"
+    android:padding="2dp">
 
     <ImageView
         android:id="@+id/ivPreview"

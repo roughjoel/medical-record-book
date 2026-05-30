@@ -205,7 +205,7 @@ public class MainActivity extends ComponentActivity {
         startCalendar = startOfDay(startCalendar);
         endCalendar = startOfDay(endCalendar);
         if (startCalendar.after(today)) {
-            Toast.makeText(this, "不能查看未来日期的病历记录", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "奇异博士还没进驻团队噢~", Toast.LENGTH_SHORT).show();
             windowAnchor = today;
             refreshCurrentWindow();
             return;
@@ -217,7 +217,7 @@ public class MainActivity extends ComponentActivity {
         String startDate = formatDate(startCalendar);
         String endDate = formatDate(endCalendar);
 
-        tvPageSubtitle.setText("所有病历 · 疾病全周期记录");
+        tvPageSubtitle.setText("未病先有备，既病可循踪");
         tvDateRange.setText((rangeDays == RANGE_WEEK ? "按周" : "按月") + " · " + startDate + " 至 " + endDate);
 
         if (currentNodesLiveData != null) {
@@ -288,7 +288,7 @@ public class MainActivity extends ComponentActivity {
         btnPickImages.setOnClickListener(v -> imagePickerLauncher.launch("image/*"));
 
         AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle(editingNode == null ? "添加病历记录" : "编辑病历记录")
+                .setTitle(editingNode == null ? "添加疾病记录" : "编辑疾病记录")
                 .setView(dialogView)
                 .setNegativeButton("取消", (d, which) -> activeDialogState = null)
                 .setPositiveButton("保存", null)
