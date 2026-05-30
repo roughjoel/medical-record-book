@@ -1,6 +1,7 @@
 package com.joel.medicalrecordbook;
 
 import android.app.AlertDialog;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.GestureDetector;
@@ -39,8 +40,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.UUID;
 
 public class MainActivity extends ComponentActivity {
@@ -49,6 +52,8 @@ public class MainActivity extends ComponentActivity {
     private static final int RANGE_WEEK = 7;
     private static final int RANGE_MONTH = 30;
     private static final String DATE_PATTERN = "yyyy-MM-dd";
+    private static final String PREFS_NAME = "medical_record_book_prefs";
+    private static final String KEY_COLLAPSED_DISEASE_NAMES = "collapsed_disease_names";
 
     private RecyclerView rvTimeline;
     private TextView tvPageSubtitle;
@@ -131,6 +136,8 @@ public class MainActivity extends ComponentActivity {
                 confirmDelete(node);
             }
         });
+        timelineAdapter.setCollapsedDiseaseNames(loadCollapsedDiseaseNames());
+        timelineAdapter.setOnGroupCollapseStateChangeListener(this::saveCollapsedDiseaseNames);
 
         rvTimeline.setLayoutManager(new LinearLayoutManager(this));
         rvTimeline.setHasFixedSize(false);
@@ -463,6 +470,18 @@ public class MainActivity extends ComponentActivity {
             builder.append(path);
         }
         return builder.toString();
+    }
+
+    private Set<String> loadCollapsedDiseaseNames() {
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        return new LinkedHashSet<>(preferences.getStringSet(KEY_COLLAPSED_DISEASE_NAMES, new LinkedHashSet<>()));
+    }
+
+    private void saveCollapsedDiseaseNames(Set<String> diseaseNames) {
+        SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        preferences.edit()
+                .putStringSet(KEY_COLLAPSED_DISEASE_NAMES, new LinkedHashSet<>(diseaseNames))
+                .apply();
     }
 
     private boolean isBlank(String value) {

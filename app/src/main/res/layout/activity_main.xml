@@ -24,7 +24,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="42dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -38,9 +38,11 @@
                 <TextView
                     android:id="@+id/tvPageTitle"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="12dp"
                     android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
                     android:text="病历本"
                     android:textColor="#162033"
                     android:textSize="26sp"

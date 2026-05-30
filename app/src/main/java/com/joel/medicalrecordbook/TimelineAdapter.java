@@ -41,6 +41,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private final List<DiseaseNodeEntity> sourceNodes = new ArrayList<>();
     private final Set<String> collapsedDiseaseNames = new LinkedHashSet<>();
     private final OnTimelineItemActionListener actionListener;
+    private OnGroupCollapseStateChangeListener collapseStateChangeListener;
 
     public TimelineAdapter(OnTimelineItemActionListener actionListener) {
         this.actionListener = actionListener;
@@ -87,6 +88,18 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         rebuildRows();
     }
 
+    public void setCollapsedDiseaseNames(Set<String> diseaseNames) {
+        collapsedDiseaseNames.clear();
+        if (diseaseNames != null) {
+            collapsedDiseaseNames.addAll(diseaseNames);
+        }
+        rebuildRows();
+    }
+
+    public void setOnGroupCollapseStateChangeListener(OnGroupCollapseStateChangeListener listener) {
+        this.collapseStateChangeListener = listener;
+    }
+
     private void rebuildRows() {
         rows.clear();
 
@@ -129,6 +142,9 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 collapsedDiseaseNames.remove(group.diseaseName);
             } else {
                 collapsedDiseaseNames.add(group.diseaseName);
+            }
+            if (collapseStateChangeListener != null) {
+                collapseStateChangeListener.onCollapseStateChanged(new LinkedHashSet<>(collapsedDiseaseNames));
             }
             rebuildRows();
         });
@@ -265,6 +281,10 @@ public class TimelineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         void onEdit(DiseaseNodeEntity node);
 
         void onDelete(DiseaseNodeEntity node);
+    }
+
+    public interface OnGroupCollapseStateChangeListener {
+        void onCollapseStateChanged(Set<String> collapsedDiseaseNames);
     }
 
     private static class DiseaseGroup {
